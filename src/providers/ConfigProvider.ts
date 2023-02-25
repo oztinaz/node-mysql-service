@@ -13,7 +13,7 @@ class ConfigProvider {
             throw new Error('MYSQL_PORT must be specified as an integer in .env file')
         }
     
-        return parseInt(process.env.PORT)
+        return parseInt(process.env.MYSQL_PORT)
     }
 
     public static user(): string {
