@@ -1,12 +1,12 @@
 import * as mysql from 'mysql'
-import ConfigProvider from '../providers/ConfigProvider'
+import MySQLProvider from '../providers/MySQLProvider'
 
 class MySQLService {
 
     private mysql: mysql.Pool
 
-    constructor() {
-        this.mysql = mysql.createPool(this.configuration())
+    constructor(configuration: mysql.PoolConfig) {
+        this.mysql = MySQLProvider.createPool(configuration)
     }
 
     public select(query: string): Promise<object> {
@@ -17,15 +17,6 @@ class MySQLService {
             })
         })
     }
-
-    private configuration(): mysql.ConnectionConfig {
-        return {
-            host: ConfigProvider.host(),
-            user: ConfigProvider.user(),
-            password: ConfigProvider.password(),
-            database: ConfigProvider.database()
-        }
-    }
 }
 
-export default new MySQLService
+export default MySQLService
